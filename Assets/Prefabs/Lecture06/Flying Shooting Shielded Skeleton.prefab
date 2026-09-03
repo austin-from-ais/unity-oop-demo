@@ -1,0 +1,166 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &553660309498056722
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6962779036176264995, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6962779036176264995, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6962779036176264995, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6962779036176264995, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6962779036176264995, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6962779036176264995, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6962779036176264995, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6962779036176264995, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6962779036176264995, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6962779036176264995, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7776329007261480345, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      propertyPath: m_Name
+      value: Flying Shooting Shielded Skeleton
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7776329007261480345, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4193633900861938099}
+    - targetCorrespondingSourceObject: {fileID: 7776329007261480345, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7610620030850970369}
+    - targetCorrespondingSourceObject: {fileID: 7776329007261480345, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5762484357087660144}
+    - targetCorrespondingSourceObject: {fileID: 7776329007261480345, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8981660401536573474}
+    - targetCorrespondingSourceObject: {fileID: 7776329007261480345, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5950496022884048305}
+  m_SourcePrefab: {fileID: 100100000, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+--- !u!1 &1660101508355829077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1199965864120483143, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+  m_PrefabInstance: {fileID: 553660309498056722}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7801902609303840139 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7776329007261480345, guid: 63b8513942e36164a85d22b2998811cf, type: 3}
+  m_PrefabInstance: {fileID: 553660309498056722}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4193633900861938099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7801902609303840139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5774d7ea14424441984f6f026e6d0d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
+  heightAboveFeet: 1.9
+  widthMeters: 1
+  fillColor: {r: 0.25, g: 0.85, b: 0.3, a: 1}
+  lowColor: {r: 0.9, g: 0.25, b: 0.2, a: 1}
+  backColor: {r: 0.1, g: 0.1, b: 0.1, a: 0.85}
+--- !u!114 &7610620030850970369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7801902609303840139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f4a04657de8984cbc17e2e45957d9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lecture06.Health
+  maxHealth: 80
+  animator: {fileID: 0}
+  healthBar: {fileID: 0}
+--- !u!114 &5762484357087660144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7801902609303840139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd8c4e2e64ded3f4eb6214346f02b2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lecture06.Shield
+  strength: 30
+  visual: {fileID: 1660101508355829077}
+--- !u!114 &8981660401536573474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7801902609303840139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f5cffe9d4ab02a41b3183fcc0e2558c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lecture06.FlyingMover
+  moveSpeed: 1.5
+  aggroRange: 9
+  keepDistance: 4
+  hoverHeight: 1.8
+  bobAmount: 0.25
+  bobSpeed: 2
+  turnSpeed: 360
+--- !u!114 &5950496022884048305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7801902609303840139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24ce1749099d680488f63526067b838a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lecture06.Shooter
+  damage: 6
+  range: 9
+  interval: 2.5
+  projectileSpeed: 8
+  muzzleHeight: 1.3

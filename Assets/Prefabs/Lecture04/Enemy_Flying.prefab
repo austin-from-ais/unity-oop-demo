@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2631895218863588330
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6303989820457938829, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303989820457938829, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303989820457938829, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303989820457938829, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303989820457938829, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303989820457938829, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303989820457938829, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303989820457938829, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303989820457938829, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303989820457938829, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644944684347209015, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+      propertyPath: m_Name
+      value: Enemy_Flying
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6644944684347209015, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5383487589948444999}
+    - targetCorrespondingSourceObject: {fileID: 6644944684347209015, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7572880013331045677}
+  m_SourcePrefab: {fileID: 100100000, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+--- !u!95 &4309469080243258742 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2254070898237900444, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+  m_PrefabInstance: {fileID: 2631895218863588330}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8696955806216320733 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6644944684347209015, guid: afe7ba9293aaa774ebc49b9d2f429dae, type: 3}
+  m_PrefabInstance: {fileID: 2631895218863588330}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5383487589948444999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8696955806216320733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5774d7ea14424441984f6f026e6d0d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
+  heightAboveFeet: 1.9
+  widthMeters: 1
+  fillColor: {r: 0.25, g: 0.85, b: 0.3, a: 1}
+  lowColor: {r: 0.9, g: 0.25, b: 0.2, a: 1}
+  backColor: {r: 0.1, g: 0.1, b: 0.1, a: 0.85}
+--- !u!114 &7572880013331045677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8696955806216320733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88804155994279b40aabd025659770e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lecture04.FlyingEnemy
+  enemyName: Skeleton Mage
+  maxHealth: 60
+  defence: 0
+  moveSpeed: 1.5
+  aggroRange: 7
+  stopDistance: 1.6
+  turnSpeed: 360
+  animator: {fileID: 4309469080243258742}
+  healthBar: {fileID: 5383487589948444999}
+  hoverHeight: 1.8
+  bobAmount: 0.25
+  bobSpeed: 2
+  keepDistance: 3
