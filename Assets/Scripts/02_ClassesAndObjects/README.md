@@ -10,7 +10,7 @@ Open `Enemy.cs`. The fields at the top are the same as `SkeletonEnemy` had. What
 underneath them: a method called `TakeDamage`. Everything the hero used to do to the skeleton in
 scene 1 now lives *inside the skeleton*, in that one method.
 
-Now open `Hero.cs` and find `LandHit`. It's one line: `enemy.TakeDamage(damage)`.
+Now open `Hero.cs` and find `TryAttack`. The hit is one line: `target.TakeDamage(damage)`.
 
 The hero no longer knows how a skeleton dies. It asks the skeleton to take damage and the skeleton
 handles the rest. That's the whole idea of a class: the data and the code that works on that data,

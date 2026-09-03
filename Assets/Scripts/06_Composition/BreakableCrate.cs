@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 // SCENE 6 - INTERFACES AND COMPOSITION
@@ -25,44 +24,11 @@ namespace Lecture06
             if (IsDead || amount <= 0) return;
 
             hits++;                                   // the amount is ignored. it's a crate.
-            StopAllCoroutines();
 
             if (IsDead)
-            {
-                GetComponent<Collider>().enabled = false;
-                StartCoroutine(Break());
-            }
+                Destroy(gameObject);
             else
-            {
-                StartCoroutine(Wobble());
-            }
-        }
-
-        IEnumerator Wobble()
-        {
-            var start = transform.localScale;
-            float t = 0f;
-            while (t < 0.25f)
-            {
-                t += Time.deltaTime;
-                float s = 1f + Mathf.Sin(t / 0.25f * Mathf.PI) * 0.15f;
-                transform.localScale = new Vector3(start.x * s, start.y / s, start.z * s);
-                yield return null;
-            }
-            transform.localScale = start;
-        }
-
-        IEnumerator Break()
-        {
-            var start = transform.localScale;
-            float t = 0f;
-            while (t < 0.3f)
-            {
-                t += Time.deltaTime;
-                transform.localScale = Vector3.Lerp(start, Vector3.zero, t / 0.3f);
-                yield return null;
-            }
-            Destroy(gameObject);
+                transform.localScale *= 0.85f;        // shrink a little so the hit is visible
         }
     }
 }

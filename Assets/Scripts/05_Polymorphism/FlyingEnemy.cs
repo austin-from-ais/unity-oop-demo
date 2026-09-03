@@ -1,8 +1,7 @@
-using System.Collections;
 using UnityEngine;
 
 // SCENE 5 - POLYMORPHISM
-// Hovers, bobs, keeps its distance. Falls when killed.
+// Hovers, bobs, keeps its distance. Drops to the ground when killed.
 
 namespace Lecture05
 {
@@ -37,18 +36,9 @@ namespace Lecture05
 
         protected override void OnDied()
         {
-            StartCoroutine(FallToGround());
-        }
-
-        IEnumerator FallToGround()
-        {
-            while (transform.position.y > 0.01f)
-            {
-                var pos = transform.position;
-                pos.y = Mathf.MoveTowards(pos.y, 0f, 6f * Time.deltaTime);
-                transform.position = pos;
-                yield return null;
-            }
+            var pos = transform.position;
+            pos.y = 0f;
+            transform.position = pos;
         }
     }
 }

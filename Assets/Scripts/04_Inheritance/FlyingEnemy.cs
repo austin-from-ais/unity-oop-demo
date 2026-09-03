@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 // SCENE 4 - INHERITANCE
@@ -7,7 +6,7 @@ using UnityEngine;
 // and none of that is written in this file. It's inherited.
 //
 // This file only says what's DIFFERENT about a flying one: how it moves, and what happens
-// when it dies (it falls out of the sky). Everything else is the parent's business.
+// when it dies (it drops out of the sky). Everything else is the parent's business.
 
 namespace Lecture04
 {
@@ -41,20 +40,12 @@ namespace Lecture04
             transform.position = pos;
         }
 
+        /// The parent's OnDied() does nothing. Ours drops the body to the ground.
         protected override void OnDied()
         {
-            StartCoroutine(FallToGround());
-        }
-
-        IEnumerator FallToGround()
-        {
-            while (transform.position.y > 0.01f)
-            {
-                var pos = transform.position;
-                pos.y = Mathf.MoveTowards(pos.y, 0f, 6f * Time.deltaTime);
-                transform.position = pos;
-                yield return null;
-            }
+            var pos = transform.position;
+            pos.y = 0f;
+            transform.position = pos;
         }
     }
 }

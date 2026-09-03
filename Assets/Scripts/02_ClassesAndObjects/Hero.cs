@@ -1,10 +1,9 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 // SCENE 2 - CLASSES AND OBJECTS
 //
-// Same hero as scene 1, with one change. Look at LandHit():
+// Same hero as scene 1, with one change. Look at TryAttack():
 // the hero no longer edits the enemy's numbers. It asks the enemy to take damage,
 // and the enemy handles the rest itself. The hero doesn't know or care how.
 
@@ -20,7 +19,6 @@ namespace Lecture02
         public int   damage         = 10;
         public float attackRange    = 1.6f;
         public float attackInterval = 1.2f;  // seconds between swings
-        public float hitDelay       = 0.45f; // seconds into the swing when damage lands
 
         [Header("Wiring")]
         public Animator animator;
@@ -131,17 +129,7 @@ namespace Lecture02
 
             nextAttackTime = Time.time + attackInterval;
             animator.SetTrigger("Attack");
-            StartCoroutine(LandHit(target));
-        }
-
-        IEnumerator LandHit(Enemy enemy)
-        {
-            yield return new WaitForSeconds(hitDelay);
-
-            if (enemy == null) yield break;
-
-            // ---- one line. the enemy does its own bookkeeping. ----
-            enemy.TakeDamage(damage);
+            target.TakeDamage(damage);   // one line. the enemy does its own bookkeeping.
         }
     }
 }

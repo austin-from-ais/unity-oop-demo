@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 // SCENE 6 - INTERFACES AND COMPOSITION
@@ -13,7 +12,6 @@ namespace Lecture06
         [SerializeField] private int   damage   = 8;
         [SerializeField] private float range    = 1.9f;
         [SerializeField] private float interval = 2f;
-        [SerializeField] private float hitDelay = 0.45f;
 
         Animator    animator;
         IDamageable self;
@@ -48,14 +46,6 @@ namespace Lecture06
 
             nextAttack = Time.time + interval;
             if (animator != null) animator.SetTrigger("Attack");
-            StartCoroutine(LandHit());
-        }
-
-        IEnumerator LandHit()
-        {
-            yield return new WaitForSeconds(hitDelay);
-            if (self != null && self.IsDead) yield break;
-
             playerDamageable.TakeDamage(damage);
         }
     }

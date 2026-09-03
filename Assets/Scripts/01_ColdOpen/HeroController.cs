@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,7 +21,6 @@ namespace Lecture01
         public int   damage         = 10;
         public float attackRange    = 1.6f;
         public float attackInterval = 1.2f;  // seconds between swings
-        public float hitDelay       = 0.45f; // seconds into the swing when damage lands
 
         [Header("Wiring")]
         public Animator animator;
@@ -133,14 +131,12 @@ namespace Lecture01
 
             nextAttackTime = Time.time + attackInterval;
             animator.SetTrigger("Attack");
-            StartCoroutine(LandHit(target));
+            LandHit(target);
         }
 
-        IEnumerator LandHit(SkeletonEnemy skeleton)
+        void LandHit(SkeletonEnemy skeleton)
         {
-            yield return new WaitForSeconds(hitDelay);
-
-            if (skeleton == null || skeleton.health <= 0) yield break;
+            if (skeleton == null || skeleton.health <= 0) return;
 
             // ---- the hero does the skeleton's bookkeeping for it ----
             int dealt = Mathf.Max(0, damage - skeleton.defence);

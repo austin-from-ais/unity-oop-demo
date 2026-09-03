@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,7 +18,6 @@ namespace Lecture03
         public int   damage         = 10;
         public float attackRange    = 1.6f;
         public float attackInterval = 1.2f;
-        public float hitDelay       = 0.45f;
 
         [Header("Wiring")]
         public Animator animator;
@@ -123,15 +121,7 @@ namespace Lecture03
 
             nextAttackTime = Time.time + attackInterval;
             animator.SetTrigger("Attack");
-            StartCoroutine(LandHit(target));
-        }
-
-        IEnumerator LandHit(Enemy enemy)
-        {
-            yield return new WaitForSeconds(hitDelay);
-            if (enemy == null) yield break;
-
-            enemy.TakeDamage(damage);
+            target.TakeDamage(damage);
         }
     }
 }
