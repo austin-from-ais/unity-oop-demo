@@ -1,0 +1,71 @@
+Assignment 3: Flying
+
+Make the player fly by reaching. Hands above the head, go up. Hands below the head, go down.
+Reach forward, left or right and the player flies that way.
+
+
+Instruction
+
+Everything you need is already in the course Unity project (OOP_Demo). There is nothing to
+download and nothing to import: the XR packages (XR Interaction Toolkit, OpenXR), the VR rig
+and the controllers are set up for you.
+
+1. Open the project in Unity 6 and open the scene Assets/Scenes/Assignment3_Flying.
+   If the scene is missing or you have broken it, rebuild it from the menu bar:
+   Assignments > Build Assignment 3 - Flying.
+
+2. Look at what is there. The scene has an XR Origin (the player) with three tracked children:
+   Main Camera (the head), Left Controller and Right Controller. Select "XR Origin (XR Rig)"
+   in the Hierarchy. It has a Flying component with those three objects already assigned.
+
+3. Press Play to check your setup before you write any code.
+   - With a headset (for example a Quest over Link): the scene starts in the headset. You see
+     a blue block for your left hand and a red block for your right hand.
+   - Without a headset: the scene starts a keyboard-and-mouse simulator instead, so you can do
+     the whole assignment on a laptop.
+   Step-by-step instructions for both, including the simulator keys, are in the project at
+   Assets/Scripts/Assignment3/README.md.
+
+4. C# script: open Assets/Scripts/Assignment3/Flying.cs and complete Update() so that the
+   player (the XR Origin) moves based on the position of the two controllers relative to
+   the head.
+
+   public class Flying : MonoBehaviour
+   {
+       public Transform leftController;
+       public Transform rightController;
+       public Transform cameraPos;
+       public float speed = 2f;
+       private Vector3 leftDir, rightDir;
+
+       void Update()
+       {
+           // complete the script
+       }
+   }
+
+   The file in the project has the same code with comments that walk you through it.
+   Flying.cs is the only file you need to change.
+
+
+Submission
+
+Please submit (1) your Flying.cs script and (2) an animated GIF made from a screen recording
+of the Unity Game view.
+
+The GIF should show the player flying up, flying down, and changing direction. Flying through
+the hoops in the scene is a good way to show all three. 10 to 20 seconds is plenty.
+
+How to record your screen
+   - Windows: Snipping Tool (Win + Shift + R) or Xbox Game Bar (Win + Alt + R).
+   - Mac: Screenshot toolbar (Shift + Command + 5).
+   Then convert the video to a GIF with any tool you like. Recent versions of the Windows
+   Snipping Tool can export a recording as a GIF directly.
+
+
+Rubric
+
+1. The player moves up or down based on the left and right hands' position
+   relative to the head.                                                        3 points
+2. The player can change direction by changing the position of the two hands.   2 points
+TOTAL                                                                           5 points
