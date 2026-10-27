@@ -35,3 +35,7 @@ sysinfo.txt
 *.app
 .DS_Store
 Thumbs.db
+
+# XR Interaction Toolkit regenerates these per machine with new GUIDs; committing them causes merge conflicts
+/Assets/XRI/
+/Assets/XRI.meta

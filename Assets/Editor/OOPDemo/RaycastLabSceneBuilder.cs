@@ -36,7 +36,6 @@ public static class RaycastLabSceneBuilder
     const string SceneDir     = "Assets/Scenes";
     const string MaterialDir  = "Assets/Materials";
     const string Simulator    = "XR Interaction Simulator";
-    const string LayerAsset   = "Assets/XRI/Settings/Resources/InteractionLayerSettings.asset";
 
     const string GhostLayer   = "Ghost";    // Unity layer. The ray's raycast mask skips it: the ray passes through.
     const string LockedLayer  = "Locked";   // XRI interaction layer. The ray stops on it but can't hover or select.
@@ -367,7 +366,9 @@ public static class RaycastLabSceneBuilder
     // ------------------------------------------------------------- layers
 
     // Adds the Unity layer "Ghost" and the XRI interaction layer "Locked" if they are not there yet.
-    static void EnsureLayers()
+    // Also runs once when the editor loads (see RaycastLabLayers below), so a fresh clone gets the
+    // layer names without anyone building the scenes.
+    public static void EnsureLayers()
     {
         var tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
         var layers = tagManager.FindProperty("layers");
@@ -379,20 +380,34 @@ public static class RaycastLabSceneBuilder
             tagManager.ApplyModifiedProperties();
         }
 
-        var settings = AssetDatabase.LoadAssetAtPath<ScriptableObject>(LayerAsset);   // InteractionLayerSettings is internal; edit it through SerializedObject
-        if (settings == null)
+        // The interaction layer names live in an asset XRI generates per machine (Assets/XRI/Settings/...).
+        // It is deliberately not in git, so find it wherever it is. The scenes only store the layer's bit,
+        // so Lab 3 works even if the name is missing; the name just makes the Inspector readable.
+        if (InteractionLayerMask.NameToLayer(LockedLayer) >= 0) return;
+
+        foreach (var guid in AssetDatabase.FindAssets("t:InteractionLayerSettings"))
         {
-            Debug.LogWarning("[Raycast Lab] " + LayerAsset + " not found. Open Edit > Project Settings > XR Interaction Toolkit once, then build again.");
-            return;
-        }
-        var so = new SerializedObject(settings);
-        var names = so.FindProperty("m_LayerNames");
-        if (names.arraySize > LockedIndex && string.IsNullOrEmpty(names.GetArrayElementAtIndex(LockedIndex).stringValue))
-        {
-            names.GetArrayElementAtIndex(LockedIndex).stringValue = LockedLayer;
+            var settings = AssetDatabase.LoadAssetAtPath<ScriptableObject>(AssetDatabase.GUIDToAssetPath(guid));
+            if (settings == null) continue;
+
+            var so = new SerializedObject(settings);
+            var names = so.FindProperty("m_LayerNames");
+            if (names == null || names.arraySize <= LockedIndex) continue;
+
+            var slot = names.GetArrayElementAtIndex(LockedIndex);
+            if (!string.IsNullOrEmpty(slot.stringValue))
+            {
+                Debug.LogWarning("[Raycast Lab] Interaction layer " + LockedIndex + " is already named '" + slot.stringValue + "'. Lab 3 calls it " + LockedLayer + ".");
+                return;
+            }
+            slot.stringValue = LockedLayer;
             so.ApplyModifiedProperties();
             EditorUtility.SetDirty(settings);
+            AssetDatabase.SaveAssetIfDirty(settings);
+            return;
         }
+
+        Debug.Log("[Raycast Lab] No InteractionLayerSettings asset yet. Open Edit > Project Settings > XR Interaction Toolkit once and XRI will create it; the Locked layer name is added the next time the editor loads.");
     }
 
     // ------------------------------------------------------------- rig
@@ -580,5 +595,22 @@ public static class RaycastLabSceneBuilder
         EditorSceneManager.SaveScene(scene, path);
         AssetDatabase.SaveAssets();
         Debug.Log("[Raycast Lab] Built " + path);
+    }
+}
+
+/// <summary>
+/// Names the Lab 3 layers on every editor load, so a student who clones the repo and opens
+/// Raycast_3 sees "Ghost" and "Locked" in the Inspector without building anything.
+/// </summary>
+[InitializeOnLoad]
+static class RaycastLabLayers
+{
+    static RaycastLabLayers()
+    {
+        EditorApplication.delayCall += () =>
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode) return;
+            RaycastLabSceneBuilder.EnsureLayers();
+        };
     }
 }
