@@ -29,7 +29,9 @@ no `main()`" lecture. See `Scripts/Lifecycle/README.md`. If you're new to Unity,
 
 And a **Sigil Lab** menu: one scene with the $1 unistroke recogniser, the seed of the VR
 sigil-casting game. Drop a line drawing into the Inspector, press the button, read the Console.
-See `Scripts/Sigils/README.md`.
+See `Scripts/Sigils/README.md`. The same menu builds the **Sigil Casters** scene: walk, draw a
+sigil in the air, cast it at a block, open the door. Every lab in one room.
+See `Scripts/SigilCasters/README.md`.
 
 And an **Assignments** menu: the starting scene for Assignment 3, a VR rig with an unfinished
 flying script. It runs in a headset, or with keyboard and mouse if you don't have one.
@@ -56,6 +58,7 @@ Assets/
     06_Composition/         Scene 6 scripts + README   (Explosion/ is a cautionary tale)
     Lifecycle/              The "why there is no main()" lab: probe, call chain, frames vs time
     Sigils/                 The $1 shape recogniser + image tester. Read DollarOneRecognizer.cs.
+    SigilCasters/           The escape-room demo: walk, draw, cast, react. All the labs in one scene.
     Assignment3/            Flying.cs (yours to finish) + README
   Editor/OOPDemo/           The scripts behind the menus. You can ignore them.
   Textures/SigilTests/      Sample line drawings for the Sigil Lab
