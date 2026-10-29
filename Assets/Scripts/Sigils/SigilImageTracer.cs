@@ -55,6 +55,42 @@ namespace Sigils
             return Trace(readable.GetPixels32(), readable.width, readable.height, maxGridSize, inkThreshold, out info);
         }
 
+        /// Trace ANY texture, including one imported the normal way. Textures imported the normal
+        /// way live on the GPU and cannot be read from C#. Rather than ask you to tick
+        /// "Read/Write" on every PNG, this copies it through a temporary render texture, traces
+        /// the copy, and throws the copy away. Works in Edit mode and Play mode.
+        public static List<Vector2> TraceAny(Texture2D anyTexture, int maxGridSize, float inkThreshold, out Info info)
+        {
+            var readable = MakeReadableCopy(anyTexture);
+            try
+            {
+                return Trace(readable, maxGridSize, inkThreshold, out info);
+            }
+            finally
+            {
+                if (Application.isPlaying) Object.Destroy(readable);
+                else                       Object.DestroyImmediate(readable);
+            }
+        }
+
+        /// Copy any Texture2D into one whose pixels C# can read, via the GPU.
+        static Texture2D MakeReadableCopy(Texture2D src)
+        {
+            var rt = RenderTexture.GetTemporary(src.width, src.height, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);
+            var previous = RenderTexture.active;
+
+            Graphics.Blit(src, rt);
+            RenderTexture.active = rt;
+
+            var copy = new Texture2D(src.width, src.height, TextureFormat.RGBA32, false, true);
+            copy.ReadPixels(new Rect(0, 0, src.width, src.height), 0, 0);
+            copy.Apply();
+
+            RenderTexture.active = previous;
+            RenderTexture.ReleaseTemporary(rt);
+            return copy;
+        }
+
         /// The same, on raw pixels (row-major, bottom row first). Plain C#: no Unity needed, so it
         /// can be tested outside the editor.
         public static List<Vector2> Trace(Color32[] px, int w, int h, int maxGridSize, float inkThreshold, out Info info)

@@ -53,76 +53,50 @@ namespace Sigils
 
             var recognizer = GetComponent<SigilRecognizer>();
 
-            // Textures imported the normal way live on the GPU and cannot be read from C#.
-            // Rather than ask you to tick "Read/Write" on every test image, we blit it into a
-            // temporary render texture and read that back. Works in Edit mode and Play mode.
-            var readable = MakeReadableCopy(image);
-            try
+            // The image was imported the normal way, so C# cannot read its pixels directly.
+            // TraceAny copies it somewhere readable, traces it, and cleans up.
+            var stroke = SigilImageTracer.TraceAny(image, traceGridSize, inkThreshold, out var info);
+
+            var sb = new StringBuilder();
+            if (stroke.Count < 2)
             {
-                var stroke = SigilImageTracer.Trace(readable, traceGridSize, inkThreshold, out var info);
-
-                var sb = new StringBuilder();
-                if (stroke.Count < 2)
-                {
-                    sb.AppendLine($"[Sigil] {image.name}: found no ink. Is it a dark line on a light background? " +
-                                  $"({info.SourceWidth}x{info.SourceHeight}, threshold {inkThreshold:0.00})");
-                    Debug.LogWarning(sb.ToString(), this);
-                    return;
-                }
-
-                var result = unknownStartAndDirection
-                    ? recognizer.RecognizeAnyStartOrDirection(stroke)
-                    : recognizer.Recognize(stroke);
-
-                bool confident = result.IsConfident(recognizer.confidenceThreshold);
-                string verdict = confident ? result.Name.ToUpperInvariant() : $"no sigil (closest was {result.Name})";
-                sb.AppendLine($"[Sigil] {image.name}  ->  {verdict}   score {result.Score:0.00}, threshold {recognizer.confidenceThreshold:0.00}");
-
-                sb.AppendLine($"        traced {info.InkCells} ink cells on a {info.GridWidth}x{info.GridHeight} grid " +
-                              $"(from {info.SourceWidth}x{info.SourceHeight} px), line about {info.LineThicknessCells:0.0} cells thick, " +
-                              $"stroke of {info.PathPoints} points covering {info.Coverage:P0} of the ink");
-
-                if (info.Coverage < 0.8f)
-                    sb.AppendLine("        WARNING: the walk could not reach all the ink. The drawing probably has more than one " +
-                                  "stroke or a gap. $1 is a unistroke recogniser; it only saw the first part.");
-
-                if (logAllScores)
-                {
-                    sb.Append("        ");
-                    for (int i = 0; i < result.Matches.Count; i++)
-                    {
-                        if (i > 0) sb.Append("  |  ");
-                        sb.Append($"{result.Matches[i].Name} {result.Matches[i].Score:0.00}");
-                    }
-                    sb.AppendLine();
-                }
-
-                if (confident) Debug.Log(sb.ToString(), this);
-                else           Debug.LogWarning(sb.ToString(), this);
+                sb.AppendLine($"[Sigil] {image.name}: found no ink. Is it a dark line on a light background? " +
+                              $"({info.SourceWidth}x{info.SourceHeight}, threshold {inkThreshold:0.00})");
+                Debug.LogWarning(sb.ToString(), this);
+                return;
             }
-            finally
+
+            var result = unknownStartAndDirection
+                ? recognizer.RecognizeAnyStartOrDirection(stroke)
+                : recognizer.Recognize(stroke);
+
+            bool confident = result.IsConfident(recognizer.confidenceThreshold);
+            string verdict = confident ? result.Name.ToUpperInvariant() : $"no sigil (closest was {result.Name})";
+            sb.AppendLine($"[Sigil] {image.name}  ->  {verdict}   score {result.Score:0.00}, threshold {recognizer.confidenceThreshold:0.00}");
+
+            sb.AppendLine($"        compared against {string.Join(", ", recognizer.KnownNames)}");
+
+            sb.AppendLine($"        traced {info.InkCells} ink cells on a {info.GridWidth}x{info.GridHeight} grid " +
+                          $"(from {info.SourceWidth}x{info.SourceHeight} px), line about {info.LineThicknessCells:0.0} cells thick, " +
+                          $"stroke of {info.PathPoints} points covering {info.Coverage:P0} of the ink");
+
+            if (info.Coverage < 0.8f)
+                sb.AppendLine("        WARNING: the walk could not reach all the ink. The drawing probably has more than one " +
+                              "stroke or a gap. $1 is a unistroke recogniser; it only saw the first part.");
+
+            if (logAllScores)
             {
-                if (Application.isPlaying) Destroy(readable);
-                else                       DestroyImmediate(readable);
+                sb.Append("        ");
+                for (int i = 0; i < result.Matches.Count; i++)
+                {
+                    if (i > 0) sb.Append("  |  ");
+                    sb.Append($"{result.Matches[i].Name} {result.Matches[i].Score:0.00}");
+                }
+                sb.AppendLine();
             }
-        }
 
-        /// Copy any Texture2D into one whose pixels C# can read, via the GPU.
-        static Texture2D MakeReadableCopy(Texture2D src)
-        {
-            var rt = RenderTexture.GetTemporary(src.width, src.height, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);
-            var previous = RenderTexture.active;
-
-            Graphics.Blit(src, rt);
-            RenderTexture.active = rt;
-
-            var copy = new Texture2D(src.width, src.height, TextureFormat.RGBA32, false, true);
-            copy.ReadPixels(new Rect(0, 0, src.width, src.height), 0, 0);
-            copy.Apply();
-
-            RenderTexture.active = previous;
-            RenderTexture.ReleaseTemporary(rt);
-            return copy;
+            if (confident) Debug.Log(sb.ToString(), this);
+            else           Debug.LogWarning(sb.ToString(), this);
         }
     }
 }

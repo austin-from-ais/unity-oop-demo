@@ -74,6 +74,9 @@ direct reference from the drawer, a ScriptableObject spell table, a spell that w
 
 - Bind `Triangle` to a new `ShrinkSpell` (scale the block to half). Three edits: a class, one
   line in the table in `SpellCaster.cs`, and nothing else.
+- Invent your own sigil. Draw it as one black line on white, save the PNG, and add it to the
+  **Bank** on the Sigil Recognizer with a name (see `Scripts/Sigils/README.md`). Then bind that
+  name in `SpellCaster.cs`. No recognizer code changes.
 - Make `LevitateSpell` wear off after 3 seconds. Where does the timer live, the spell or the block?
 - Add a second generator and make the door need both. What does `PoweredDoor` look like now?
 - Replace the direct `caster.Load(...)` call in `SigilDrawer` with a `UnityEvent<string>` and

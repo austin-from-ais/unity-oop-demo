@@ -55,6 +55,45 @@ namespace Sigils
             r.AddTemplate(name, reversed);
         }
 
+        /// Add a stroke that came from a PICTURE (see SigilImageTracer) rather than from geometry.
+        ///
+        /// The tracer starts at the top-most bit of ink and walks whichever way it happens to go,
+        /// so the stroke's start point means nothing. But $1 compares point i with point i, so a
+        /// template that starts at the top only matches a player who ALSO starts at the top.
+        ///
+        /// Fix: if the shape is closed (a circle, a star), store it `startOffsets` times, each
+        /// time beginning a little further round, forwards and backwards. Now it does not matter
+        /// where the player starts. That is 2 * startOffsets templates under one name, and
+        /// Recognize() reports only the best of them, so the leaderboard still shows the name once.
+        ///
+        /// If the shape is open (a line, a V), "start further round" would mean jumping from one
+        /// end back to the other, which is a different shape. So an open shape is stored only
+        /// forwards and backwards, and the player has to start at one of its ends.
+        ///
+        /// SIMPLE vs ROBUST: "closed" here means the ends are within 15% of the stroke's length
+        /// of each other. Good enough for clean drawings; a robust version would let you say.
+        public static void AddFromStroke(DollarOneRecognizer r, string name, IList<Vector2> stroke, int startOffsets = 16)
+        {
+            int n = stroke.Count;
+            float endGap = Vector2.Distance(stroke[0], stroke[n - 1]);
+            bool closed  = endGap < 0.15f * DollarOneRecognizer.PathLength(stroke);
+
+            var asArray = new List<Vector2>(stroke).ToArray();
+            if (!closed)
+            {
+                AddBothDirections(r, name, asArray);
+                return;
+            }
+
+            for (int k = 0; k < startOffsets; k++)
+            {
+                int offset = k * n / startOffsets;
+                var rotated = new Vector2[n];
+                for (int i = 0; i < n; i++) rotated[i] = asArray[(i + offset) % n];
+                AddBothDirections(r, name, rotated);
+            }
+        }
+
         /// A circle starting at the top (12 o'clock) and going clockwise.
         static Vector2[] Circle(int segments)
         {

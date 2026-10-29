@@ -21,6 +21,21 @@ recogniser will not change.
 Then draw your own in any paint program, drop the PNG into the project, and try that. Try a
 scribble too, and watch the score fall below the threshold.
 
+## Teach it a new sigil from a picture
+
+The **Sigil Recognizer** component shows the **bank**: everything a stroke is compared against.
+
+1. **Include Built In Shapes** is the seven shapes from `SigilTemplates.cs`. Turn it off to
+   compare against your own pictures only.
+2. **Bank** is your own sigils. Press **+**, type a **Name**, drag a PNG into **Image**. Same
+   rules as the test image: one black line on white, drawn in one stroke.
+3. Draw the same shape again in a second PNG, put that one in the **Sigil Image Test** slot
+   and press the button. The readout lists the bank it compared against and the score for
+   every name. Your shape should win, and the runner-up should be well below the threshold.
+
+The name you typed is what the recogniser reports, in this scene and in VR. In Sigil Casters,
+add that name to the table in `SpellCaster.cs` to bind it to a spell.
+
 ## The scripts, in reading order
 
 | File | What it is |
