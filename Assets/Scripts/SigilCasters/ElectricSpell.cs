@@ -10,9 +10,9 @@ using UnityEngine;
 // the caster does not need an if/else per spell.
 //
 // SIMPLE vs ROBUST:
-//   - Recolouring with .material.color. '.material' quietly gives this block its own copy of the
+//   - Recoloring with .material.color. '.material' quietly gives this block its own copy of the
 //     material, which is what we want: only THIS block turns yellow. '.sharedMaterial' would
-//     recolour every block that uses it. The robust version has an emissive "glow" material
+//     recolor every block that uses it. The robust version has an emissive "glow" material
 //     made in advance and swaps it in.
 //   - No sparks, no sound, no timer. Powered is forever.
 

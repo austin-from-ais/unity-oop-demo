@@ -35,7 +35,7 @@ namespace SigilCasters
         [Tooltip("The left thumbstick, as an Input System action. The scene builder binds it to <XRController>{LeftHand}/{Primary2DAxis}.")]
         public InputActionProperty moveStick;
 
-        [Tooltip("Walking speed in metres per second. 2 is a brisk walk.")]
+        [Tooltip("Walking speed in meters per second. 2 is a brisk walk.")]
         public float speed = 2f;
 
         // An InputAction does nothing until it is enabled. Think of it as a component that
@@ -52,7 +52,7 @@ namespace SigilCasters
             // 2. Which way is "forward"? The way the head faces... but flattened. If you look at
             //    the floor and push the stick, you want to walk, not sink into the ground. So
             //    throw away the up/down part of the head's forward arrow, then make it one
-            //    metre long again (Normalize), so looking down does not also make you slower.
+            //    meter long again (Normalize), so looking down does not also make you slower.
             Vector3 forward = head.forward;
             forward.y = 0f;
             forward.Normalize();

@@ -26,7 +26,7 @@ namespace SigilCasters
 
             body.useGravity     = false;             // stop falling
             body.linearDamping  = 2f;                // air resistance: the nudge dies out instead of carrying on forever
-            body.linearVelocity = Vector3.up * 2f;   // the nudge: 2 metres per second, straight up
+            body.linearVelocity = Vector3.up * 2f;   // the nudge: 2 meters per second, straight up
         }
     }
 }

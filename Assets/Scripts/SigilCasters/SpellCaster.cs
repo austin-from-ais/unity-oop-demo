@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 // gets the spell.
 //
 // This is Raycast Lab 1 again. The question is the same one: "start at the hand, go the way it
-// points, what is the first collider within N metres?" The only new part is what we do with the
+// points, what is the first collider within N meters?" The only new part is what we do with the
 // answer: look for a SpellTarget component on it and hand it the spell.
 //
 // Two buttons, two jobs, the same split as the Raycast Lab:
@@ -40,13 +40,13 @@ namespace SigilCasters
         [Tooltip("The grip button, as an Input System action. The scene builder binds it to <XRController>{RightHand}/{GripButton}.")]
         public InputActionProperty castButton;
 
-        [Tooltip("How far a spell can reach, in metres.")]
+        [Tooltip("How far a spell can reach, in meters.")]
         public float maxDistance = 10f;
 
         [Tooltip("Read-only, so you can watch it in the Inspector: the spell currently loaded, or blank.")]
         public string loadedSpellName = "";
 
-        [Header("Aim line colours")]
+        [Header("Aim line colors")]
         public Color unloadedColor = new Color(1f, 1f, 1f, 0.2f);   // faint: nothing to cast yet
         public Color missColor     = new Color(1f, 0.3f, 0.3f);     // loaded, but not pointing at a target
         public Color hitColor      = new Color(0.3f, 1f, 0.4f);     // loaded and pointing at a target
@@ -99,12 +99,12 @@ namespace SigilCasters
             //    returned true: otherwise its fields are leftovers from some earlier frame.
             SpellTarget target = hitSomething ? hit.collider.GetComponent<SpellTarget>() : null;
 
-            // 3. Draw the aim line, coloured by what would happen if you pressed grip right now.
+            // 3. Draw the aim line, colored by what would happen if you pressed grip right now.
             Vector3 end = hitSomething ? hit.point : origin + direction * maxDistance;
             aimLine.SetPosition(0, origin);
             aimLine.SetPosition(1, end);
-            Color colour = loaded == null ? unloadedColor : (target != null ? hitColor : missColor);
-            aimLine.startColor = aimLine.endColor = colour;
+            Color color = loaded == null ? unloadedColor : (target != null ? hitColor : missColor);
+            aimLine.startColor = aimLine.endColor = color;
 
             // 4. Grip pressed this frame? If not, we are done.
             if (!castButton.action.WasPressedThisFrame()) return;

@@ -23,10 +23,10 @@ namespace SigilCasters
         [Tooltip("The block that has to be powered (hit with the Electric spell) for this door to open.")]
         public SpellTarget generator;
 
-        [Tooltip("How far up the door slides, in metres.")]
+        [Tooltip("How far up the door slides, in meters.")]
         public float openHeight = 2.4f;
 
-        [Tooltip("How fast it slides, in metres per second.")]
+        [Tooltip("How fast it slides, in meters per second.")]
         public float speed = 1f;
 
         Vector3 closedPosition;   // remembered on Awake, so 'open' can be measured from it

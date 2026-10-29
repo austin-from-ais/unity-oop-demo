@@ -1,7 +1,7 @@
 # Sigil Casters — putting the pieces together
 
 One scene that uses everything from the labs at once. You walk up to a block, draw a shape in
-the air with the right controller, the $1 recogniser names it, you point at a block and press
+the air with the right controller, the $1 recognizer names it, you point at a block and press
 grip, and the block reacts. Power the generator and the door opens.
 
 | Menu item | Scene |
@@ -34,7 +34,7 @@ while playing. Then draw a scribble and see what it takes to get a false positiv
 | Part | File | Lab it comes from | What it does |
 |---|---|---|---|
 | 1 | `StickWalk.cs` | Assignment 3 (Flying) | Left stick moves the XR Origin along the head's flattened forward. |
-| 2 | `SigilDrawer.cs` | Sigil Lab | Trigger held = record hand positions. Trigger up = flatten onto a page facing the head, call the recogniser, tell the caster the shape's name. |
+| 2 | `SigilDrawer.cs` | Sigil Lab | Trigger held = record hand positions. Trigger up = flatten onto a page facing the head, call the recognizer, tell the caster the shape's name. |
 | 3 | `SpellCaster.cs` | Raycast Lab 1 | Holds the loaded spell. Grip = `Physics.Raycast` from the hand; if the hit has a `SpellTarget`, `spell.Apply(target)`. |
 | 4 | `Spell.cs`, `LevitateSpell.cs`, `ElectricSpell.cs`, `SpellTarget.cs`, `PoweredDoor.cs` | Scenes 3 to 6 | What a spell is (abstract class), two spells (polymorphism), what a block hands over (composition, encapsulation), and a door that watches a block. |
 
